@@ -10,3 +10,4 @@ down:
 	docker compose down
 clean:
 	docker compose down -v
+	rm -rf backend/fifty_apis/migrations/0*.py

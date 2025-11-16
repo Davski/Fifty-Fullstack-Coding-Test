@@ -57,6 +57,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+AUTH_USER_MODEL = "fifty_apis.User"
+
 ROOT_URLCONF = 'fifty_backend.urls'
 
 TEMPLATES = [
