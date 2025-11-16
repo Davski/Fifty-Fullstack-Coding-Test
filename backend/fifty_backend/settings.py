@@ -20,9 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = [
-    os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-(vr_c#kp=*tm50sxs9@$=_)v5p4*-jy=rx0e#+p3clt95kcb0x'),
-]
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-(vr_c#kp=*tm50sxs9@$=_)v5p4*-jy=rx0e#+p3clt95kcb0x')
 
 #DEBUG = os.environ.get('DJANGO_DEBUG', "False").lower()
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() in ("true")
@@ -38,9 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'corsheaders',
+    'fifty_apis',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,6 +51,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
 ]
 
 ROOT_URLCONF = 'fifty_backend.urls'
@@ -84,6 +91,17 @@ DATABASES = {
         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
     }
 }
+
+# REST Framework stuff
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

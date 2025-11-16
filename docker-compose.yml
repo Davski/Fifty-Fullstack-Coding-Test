@@ -10,8 +10,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./backend/seed_files/sensor_readings_wide.csv:/tmp/sensor_readings_wide.csv
-      - ./backend/seed_files/seed_database.sql:/tmp/seed_database.sql
+      - ./backend/seed_files/:/tmp/seed_files
 
   web:
     build: ./backend

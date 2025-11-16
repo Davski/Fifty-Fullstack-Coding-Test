@@ -18,17 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path
-from ninja import NinjaAPI
-
-
-api = NinjaAPI()
-
-@api.get("/test")
-def test(request, a: int):
-    return {"status": a+a}
+from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
+from fifty_apis.api import api
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('api/', api.urls),
+    path('admin/', admin.site.urls),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
