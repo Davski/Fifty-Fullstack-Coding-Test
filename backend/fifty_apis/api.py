@@ -5,13 +5,14 @@ from django.db import IntegrityError
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
 
+
 api = NinjaAPI()
 User = get_user_model()
 
 class RegisterUser(Schema):
     username: str
     password: str
-    email: str
+    email: EmailStr
 
 class UserOutput(Schema):
     id: int
@@ -29,6 +30,7 @@ def register_user(request, user: RegisterUser):
             email=user.email,
             password=user.password,
         )
+
     except IntegrityError:
         return 400, {"detail": "An Error occured"}
     
