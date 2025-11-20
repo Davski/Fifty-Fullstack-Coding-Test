@@ -2,6 +2,7 @@
   <head>
     <title>Fifty Fullstack Coding Test</title>
     <link rel='stylesheet' href='styles.css'>
+    <script type='text/javascript' src='app.js'></script>
   </head>
   <body>
     <h1 style='text-align: center' class='title'>Welcome to my coding test</h1>
@@ -17,61 +18,16 @@
         <input type='submit' value='Submit' style='display: none'>
       </form>
       <div class='button' id='registerUser' style='background-color: gray; max-width: 300px'>Register User</div>
-      <div class='button' id='getToken' style='background-color: gray; max-width: 300px'>Get Token</div>
+      <div class='button' id='loginUser' style='background-color: gray; max-width: 300px'>Login User</div>
+      <div class='button' id='getReading' style='background-color: gray; max-width: 300px'>Get Readings</div>
       <div class='databox' id='responseData'>
       </div>
   </body>
   <footer>
   </footer>
 </html>
-<script>  
-  async function getToken() {
-      const BASE_URL = 'http://localhost:8000/api/login-user'
-      try {
-          let username = document.getElementById('username').value;
-          let password = document.getElementById('password').value;
-          let email = document.getElementById('email').value;
-          const response = await fetch(BASE_URL, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({username: username, password: password, email: email})
-          });
-          if (!response.ok) {              
-              throw new Error(`Response status: ${response.status}`);
-          }
-          const result = await response.json();
-          const responseData = document.getElementById('responseData');
-          responseData.innerHTML = 'Access: ' + result.access + '\n' + 'Refresh: ' + result.refresh;
-      } catch (error) {
-          console.error(error.message);
-      }
-  }
-  async function registerUser() {
-      console.log('Function register running');
-      const BASE_URL = 'http://localhost:8000/api/register-user'
-      try {
-          let username = document.getElementById('username').value;
-          let password = document.getElementById('password').value;
-          let email = document.getElementById('email').value;
-          const response = await fetch(BASE_URL, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({username: username, password: password, email: email})
-          });
-          if (!response.ok) {
-              throw new Error(`Response status: ${response.status}`);
-          }
-          const result = await response.json();
-          const responseData = document.getElementById('responseData');
-          responseData.innerHTML = 'User created: ' + result.username + ' email: ' + result.email;
-      } catch (error) {
-          console.error(error.message);
-      }
-  }
-  document.getElementById('getToken').addEventListener('click', getToken);
+<script>
   document.getElementById('registerUser').addEventListener('click', registerUser);
+  document.getElementById('loginUser').addEventListener('click', loginUser);
+  document.getElementById('getReading').addEventListener('click', getReadings);
 </script>

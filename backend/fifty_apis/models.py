@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=False)
 
     def __str__(self):
         return self.username
@@ -29,6 +29,6 @@ class Reading(models.Model):
 
     class Meta:
         indexes = [
-            models.Index(fields=["sensor","timestamp"]),
+            models.Index(fields=['sensor','timestamp']),
         ]
-        models.UniqueConstraint(fields=["sensor", "timestamp"], name="unique_together")
+        models.UniqueConstraint(fields=['sensor', 'timestamp'], name='unique_together')
