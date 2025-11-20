@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 
 # Create your managers here.
-class UserSeedManager(models.Manager):
+class UserSeedManager(UserManager):
     def seed_data(self):
         user, created = self.get_or_create(username='one_user', email='one@user.com')
         if created:
@@ -10,7 +10,7 @@ class UserSeedManager(models.Manager):
             user.save()
         return user
 
-class SensorSeedManager(models.Manager):
+class SensorSeedManager(UserManager):
     def seed_data(self):
         user = User.objects.get(username='one_user')
 
