@@ -25,7 +25,7 @@ class Reading(models.Model):
     humidity = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return self.name + ' ' + self.temperature + ' ' + self.humidity + ' ' + self.timestamp
+        return self.name + ': temperature: ' + self.temperature + ': humidity: ' + self.humidity + ': time: ' + self.timestamp
 
     class Meta:
         indexes = [
