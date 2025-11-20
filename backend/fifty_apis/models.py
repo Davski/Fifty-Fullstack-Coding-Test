@@ -1,10 +1,40 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+# Create your managers here.
+class UserSeedManager(models.Manager):
+    def seed_data(self):
+        user, created = self.get_or_create(username='one_user', email='one@user.com')
+        if created:
+            user.set_password('pass')
+            user.save()
+        return user
 
+class SensorSeedManager(models.Manager):
+    def seed_data(self):
+        user = User.objects.get(username='one_user')
+
+        sensors = [
+            {'name': 'device-001', 'description': 'Predefined Sensor', 'model': 'EnviroSense'},
+            {'name': 'device-002', 'description': 'Predefined Sensor', 'model': 'ClimaTrack'},
+            {'name': 'device-003', 'description': 'Predefined Sensor', 'model': 'AeroMonitor'},
+            {'name': 'device-004', 'description': 'Predefined Sensor', 'model': 'HydroTherm'},
+            {'name': 'device-005', 'description': 'Predefined Sensor', 'model': 'EcoStat'},
+        ]
+
+        for sensor in sensors:
+            self.get_or_create(
+                owner=user,
+                name=sensor['name'],
+                description=sensor['description'],
+                model=sensor['model'],
+            )
+
+# Create your models here.
 class User(AbstractUser):
     email = models.EmailField(unique=False)
+
+    objects = UserSeedManager()
 
     def __str__(self):
         return self.username
@@ -14,6 +44,8 @@ class Sensor(models.Model):
     name = models.CharField()
     description = models.CharField()
     model = models.CharField()
+
+    objects = SensorSeedManager()
 
     def __str__(self):
         return self.name + ' ' + self.description

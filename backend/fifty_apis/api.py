@@ -19,7 +19,7 @@ class UserOutput(Schema):
     username: str
     email: str
 
-@api.post('/register-user', response={201: UserOutput, 400: dict, 422: dict})
+@api.post('/register-user', response={201: UserOutput, 400: dict})
 def register_user(request, user: RegisterUser):
     if User.objects.filter(username=user.username).exists():
         return 400, {'detail': 'Username is taken'}
@@ -42,11 +42,13 @@ class TokenOutput(Schema):
 
 @api.post('/login-user', response={200: TokenOutput, 400: dict})
 def login_user(request, login: LoginUser):
+
     user = authenticate(
         request,
         username=login.username,
         password=login.password,
     )
+
     if not user:
         return 400, {'detail': 'Invalid username or password'}
 

@@ -18,7 +18,8 @@ async function registerUser() {
             body: JSON.stringify({
 		username,
 		password,
-		email})
+		email,
+	    })
         });
         if (!response.ok) {
 	    const error = await response.json();
