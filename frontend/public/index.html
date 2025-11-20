@@ -30,21 +30,21 @@
       try {
           let username = document.getElementById('username').value;
           let password = document.getElementById('password').value;
+          let email = document.getElementById('email').value;
           const response = await fetch(BASE_URL, {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
               },
-              body: JSON.stringify({username: username, password: password})
+              body: JSON.stringify({username: username, password: password, email: email})
           });
           if (!response.ok) {              
               throw new Error(`Response status: ${response.status}`);
           }
           const result = await response.json();
           const responseData = document.getElementById('responseData');
-          responseData.innerHTML = 'Access: ' + result.access + '\n' + 'Refresh' + result.refresh;
+          responseData.innerHTML = 'Access: ' + result.access + '\n' + 'Refresh: ' + result.refresh;
       } catch (error) {
-          console.log("inside catch")
           console.error(error.message);
       }
   }
