@@ -21,6 +21,7 @@ make seed: Seed the database with one user, five sensors and run make seed_readi
 make seed_readings: Seed the database with sensor readings from csv file. Uses a hacky method under development.  
 make test to run all tests, currently no tests exist.  
 make clean to turn off and remove containers and networks and also remove volumes.  
+make connect: Connects to psql through CLI to check the database manually using env variables.
 
 The API overview is located within http://localhost:8000/api/docs
 
