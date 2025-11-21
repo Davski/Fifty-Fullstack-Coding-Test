@@ -11,7 +11,7 @@ POSTGRES_PORT=5432
 DJANGO_SECRET_KEY=djangosecretkey  
 DJANGO_DEBUG=False  
 
-Use the Makefile commands to run the system locally.  
+Use the Makefile commands to run the system on docker.  
 make full: runs make up && make migrate && make seed.  
 make up: Put up containers, networks and volumes.  
 make down: Turn off and remove containers and networks.  
