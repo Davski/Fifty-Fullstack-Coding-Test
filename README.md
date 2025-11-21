@@ -3,16 +3,18 @@ A coding test for Fifty using Python, Django, PostgreSQL
 
 An example .env file to have within your root folder of the project
 
-POSTGRES_DB=sensorsdb  
-POSTGRES_USER=username  
-POSTGRES_PASSWORD=password  
-POSTGRES_HOST=db  
-POSTGRES_PORT=5432  
-DJANGO_SECRET_KEY=djangosecretkey  
-DJANGO_DEBUG=False  
+```env
+POSTGRES_DB=sensorsdb
+POSTGRES_USER=username
+POSTGRES_PASSWORD=password
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+DJANGO_SECRET_KEY=djangosecretkey
+DJANGO_DEBUG=False
+```
 
 Use the Makefile commands to run the system on docker.  
-make full: runs make up && make migrate && make seed.  
+make full: runs make up && make migrate && make seed. (Recommended for first time use)
 make up: Put up containers, networks and volumes.  
 make logs: Show the Docker console logs.  
 make down: Turn off and remove containers and networks.  
