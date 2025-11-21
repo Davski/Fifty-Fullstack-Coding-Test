@@ -17,11 +17,12 @@ migrate:
 
 test:
 
+seed_readings:
+	docker compose exec db psql -d ${POSTGRES_DB} -U ${POSTGRES_USER} -c "\COPY fifty_apis_reading FROM '/tmp/seed_files/sensor_readings_wide.csv' DELIMITER ',' CSV HEADER"
+
 seed:
 	docker compose exec web python manage.py seed_database
-
-seed_old:
-	docker compose exec db psql -d ${POSTGRES_DB} -U ${POSTGRES_USER} -c "\COPY fifty_apis_reading FROM '/tmp/seed_files/sensor_readings_wide.csv' DELIMITER ',' CSV HEADER"
+	make seed_readings
 
 down:
 	docker compose down

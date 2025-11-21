@@ -6,7 +6,7 @@ class UserSeedManager(UserManager):
     def seed_data(self):
         user, created = self.get_or_create(username='one_user', email='one@user.com')
         if created:
-            user.set_password('pass')
+            user.set_password('password')
             user.save()
         return user
 
@@ -32,7 +32,7 @@ class SensorSeedManager(UserManager):
 
 # Create your models here.
 class User(AbstractUser):
-    email = models.EmailField(unique=False)
+    email = models.EmailField(unique=True)
 
     objects = UserSeedManager()
 

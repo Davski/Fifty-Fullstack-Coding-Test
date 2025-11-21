@@ -11,8 +11,8 @@ api = NinjaAPI()
 User = get_user_model()
 
 class RegisterUser(Schema):
-    username: constr(strip_whitespace=True, min_length=1)
-    password: constr(strip_whitespace=True, min_length=1)
+    username: constr(strip_whitespace=True, min_length=3)
+    password: constr(strip_whitespace=True, min_length=6)
     email: EmailStr
 
 class UserOutput(Schema):
@@ -21,6 +21,18 @@ class UserOutput(Schema):
 
 @api.post('/register-user', response={201: UserOutput, 400: dict})
 def register_user(request, user: RegisterUser):
+    """
+    Registers a user
+
+    **Input**:
+
+    - **username**: Name - minimum length 3 character
+    - **password**: Password - minimum length 6 characters
+    - **email**: Email - Should be unique with correct formatting
+
+    **Response**: 201 Created: Body contains the username and email
+    """
+
     if User.objects.filter(username=user.username).exists():
         return 400, {'detail': 'Username is taken'}
 
@@ -42,6 +54,16 @@ class TokenOutput(Schema):
 
 @api.post('/login-user', response={200: TokenOutput, 400: dict})
 def login_user(request, login: LoginUser):
+    """
+    Logs a user in
+
+    **Input**:
+
+    - **username**: Name - minimum length 3 character
+    - **password**: Password - minimum length 6 characters
+
+    **Response**: 200 OK: Body contains refresh and access tokens
+    """
 
     user = authenticate(
         request,
@@ -65,6 +87,13 @@ class readingOutput(Schema):
 
 @api.get('/readings', response={200: list[readingOutput], 404: dict})
 def get_readings(request):
+    """
+    Gets all readings
+
+    **Response**: 200 OK: Returns full list of readings
+
+    """
+
     reading_list = list(Reading.objects.values('sensor', 'temperature', 'humidity', 'timestamp'))
     if not reading_list:
         return 404, {'detail': 'Database is empty'}
