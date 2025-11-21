@@ -22,3 +22,19 @@ make test to run all tests, currently no tests exist.
 make clean to turn off and remove containers and networks and also remove volumes.  
 
 The API overview is located within http://localhost:8000/api/docs
+
+The code currently DOES NOT support.
+
+Actually logging in and owning sensors by user.  
+What happens is on successful login the access and refresh tokens are printed on the screen.  
+
+Seeding the readings databse through a model manager.
+This would be required to make each sensor own its readings through a foreign key.
+An actual frontend with paginations to see readings and filter them, own or delete them.
+A graph to show the data visually.  
+Styling for the frontend.
+Actual tests using pytest and pytest-django.  
+
+What can be tested:
+api/docs works, has schemas and docstrings to explain the different apis.  
+The frontend and backend has error handling included, and one can register, "login", and get sensor readings.
