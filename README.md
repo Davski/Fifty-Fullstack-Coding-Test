@@ -16,7 +16,7 @@ make full: runs make up && make migrate && make seed.
 make up: Put up containers, networks and volumes.  
 make down: Turn off and remove containers and networks.  
 make migrate: Run makemigrations and migrate.  
-make seed: Seed the database with one user, five sensors and run make seed_reading.  
+make seed: Seed the database with one user, five sensors and run make seed_readings.  
 make seed_readings: Seed the database with sensor readings from csv file. Uses a hacky method under development.  
 make test to run all tests, currently no tests exist.  
 make clean to turn off and remove containers and networks and also remove volumes.  
@@ -28,9 +28,9 @@ The code currently DOES NOT support.
 Actually logging in and owning sensors by user.  
 What happens is on successful login the access and refresh tokens are printed on the screen.  
 
-Seeding the readings databse through a model manager.  
+Seeding the readings database through a model manager.  
 This would be required to make each sensor own its readings through a foreign key.  
-An actual frontend with paginations to see readings and filter them, own or delete them.  
+An actual separate frontend page with paginations to see readings and filter them, own or delete them.  
 A graph to show the data visually.  
 Styling for the frontend.  
 Actual tests using pytest and pytest-django.  
