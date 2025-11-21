@@ -14,6 +14,7 @@ DJANGO_DEBUG=False
 Use the Makefile commands to run the system on docker.  
 make full: runs make up && make migrate && make seed.  
 make up: Put up containers, networks and volumes.  
+make logs: Show the Docker console logs.  
 make down: Turn off and remove containers and networks.  
 make migrate: Run makemigrations and migrate.  
 make seed: Seed the database with one user, five sensors and run make seed_readings.  
